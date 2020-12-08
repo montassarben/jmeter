@@ -92,15 +92,15 @@
         <boolProp name="AuthManager.clearEachIteration">true</boolProp>
       </AuthManager>
       <hashTree/>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="false">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Login/create post" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">1</stringProp>
+          <stringProp name="LoopController.loops">2</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">20</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">10</stringProp>
-        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.num_threads">5</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">2</stringProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
         <stringProp name="ThreadGroup.duration">300</stringProp>
         <stringProp name="ThreadGroup.delay">0</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -109,7 +109,7 @@
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
           <stringProp name="delimiter">:</stringProp>
           <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="filename">D:/apache-jmeter-5.3/bin/load2/CSVSample_user.csv</stringProp>
+          <stringProp name="filename">D:/apache-jmeter-5.3/bin/loading/CSVSample_user.csv</stringProp>
           <boolProp name="ignoreFirstLine">false</boolProp>
           <boolProp name="quotedData">false</boolProp>
           <boolProp name="recycle">true</boolProp>
@@ -119,7 +119,7 @@
         </CSVDataSet>
         <hashTree/>
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
-          <stringProp name="filename">D:/apache-jmeter-5.3/bin/load2/allthread.csv</stringProp>
+          <stringProp name="filename">D:/apache-jmeter-5.3/bin/loading/allthread.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
           <stringProp name="variableNames">thread</stringProp>
           <boolProp name="ignoreFirstLine">false</boolProp>
@@ -131,7 +131,7 @@
         </CSVDataSet>
         <hashTree/>
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
-          <stringProp name="filename">D:/apache-jmeter-5.3/bin/load2/allthread.csv</stringProp>
+          <stringProp name="filename">D:/apache-jmeter-5.3/bin/loading/allthread.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
           <stringProp name="variableNames">th,num</stringProp>
           <boolProp name="ignoreFirstLine">false</boolProp>
@@ -420,7 +420,7 @@ String str= ctx.getPreviousResult().getResponseDataAsString();
         </HTTPSamplerProxy>
         <hashTree>
           <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
-            <boolProp name="resetInterpreter">true</boolProp>
+            <boolProp name="resetInterpreter">false</boolProp>
             <stringProp name="parameters"></stringProp>
             <stringProp name="filename"></stringProp>
             <stringProp name="script">import org.apache.jmeter.protocol.http.control.*;
@@ -736,6 +736,25 @@ vars.put(&quot;subject&quot;,subject);
 vars.put(&quot;text&quot;,text);</stringProp>
           </BeanShellPostProcessor>
           <hashTree/>
+          <PreciseThroughputTimer guiclass="TestBeanGUI" testclass="PreciseThroughputTimer" testname="Precise Throughput Timer" enabled="false">
+            <doubleProp>
+              <name>allowedThroughputSurplus</name>
+              <value>1.0</value>
+              <savedValue>0.0</savedValue>
+            </doubleProp>
+            <intProp name="batchSize">1</intProp>
+            <intProp name="batchThreadDelay">0</intProp>
+            <longProp name="duration">30000</longProp>
+            <intProp name="exactLimit">10000</intProp>
+            <longProp name="randomSeed">0</longProp>
+            <doubleProp>
+              <name>throughput</name>
+              <value>100.0</value>
+              <savedValue>0.0</savedValue>
+            </doubleProp>
+            <intProp name="throughputPeriod">30000</intProp>
+          </PreciseThroughputTimer>
+          <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Forum/add/beitrag" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
@@ -837,202 +856,14 @@ vars.put(&quot;text&quot;,text);</stringProp>
             </collectionProp>
           </HeaderManager>
           <hashTree/>
-          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Uniform Random Timer" enabled="true">
-            <stringProp name="RandomTimer.range">0.0</stringProp>
-            <stringProp name="ConstantTimer.delay">0</stringProp>
-            <stringProp name="TestPlan.comments">Recorded time was 0 milliseconds</stringProp>
+          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="false">
+            <stringProp name="ConstantTimer.delay">30000</stringProp>
+          </ConstantTimer>
+          <hashTree/>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Uniform Random Timer" enabled="false">
+            <stringProp name="ConstantTimer.delay">30000</stringProp>
+            <stringProp name="RandomTimer.range">0</stringProp>
           </UniformRandomTimer>
-          <hashTree/>
-        </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://forum.bajj.de/forum/index.php?ajax-proxy/&amp;t=f3a4f93edab1b1edfd602c3cac280a3ffa843414" enabled="false">
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="ajax-proxy/" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.name">ajax-proxy/</stringProp>
-                <stringProp name="Argument.value"></stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-              <elementProp name="t" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.name">t</stringProp>
-                <stringProp name="Argument.value">${t}</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-              <elementProp name="parameters[boardID]" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.name">parameters[boardID]</stringProp>
-                <stringProp name="Argument.value">${boardID}</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-              <elementProp name="parameters[topic]" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.name">parameters[topic]</stringProp>
-                <stringProp name="Argument.value">Jmeter</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-              <elementProp name="className" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.name">className</stringProp>
-                <stringProp name="Argument.value">wbb\data\thread\ThreadAction</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-              <elementProp name="actionName" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.name">actionName</stringProp>
-                <stringProp name="Argument.value">getSimilarThreads</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-            </collectionProp>
-          </elementProp>
-          <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
-          <stringProp name="HTTPSampler.port"></stringProp>
-          <stringProp name="HTTPSampler.protocol">https</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/forum/index.php?ajax-proxy/&amp;t=${t}</stringProp>
-          <stringProp name="HTTPSampler.method">POST</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
-        </HTTPSamplerProxy>
-        <hashTree>
-          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
-            <collectionProp name="HeaderManager.headers">
-              <elementProp name="X-Requested-With" elementType="Header">
-                <stringProp name="Header.name">X-Requested-With</stringProp>
-                <stringProp name="Header.value">XMLHttpRequest</stringProp>
-              </elementProp>
-              <elementProp name="Content-Type" elementType="Header">
-                <stringProp name="Header.name">Content-Type</stringProp>
-                <stringProp name="Header.value">application/x-www-form-urlencoded; charset=UTF-8</stringProp>
-              </elementProp>
-              <elementProp name="Accept" elementType="Header">
-                <stringProp name="Header.name">Accept</stringProp>
-                <stringProp name="Header.value">*/*</stringProp>
-              </elementProp>
-            </collectionProp>
-          </HeaderManager>
-          <hashTree/>
-          <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
-            <stringProp name="filename"></stringProp>
-            <stringProp name="parameters"></stringProp>
-            <boolProp name="resetInterpreter">true</boolProp>
-            <stringProp name="script">import org.apache.jmeter.protocol.http.control.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.*;
-
-
-
-
-
-     CookieManager cm= ctx.getCurrentSampler().getCookieManager();
-     
-      log.info(ctx.getPreviousResult().getResponseDataAsString());
-      
-		</stringProp>
-          </BeanShellPostProcessor>
-          <hashTree/>
-        </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="https://forum.bajj.de/forum/index.php?ajax-proxy/&amp;t=f3a4f93edab1b1edfd602c3cac280a3ffa843414" enabled="false">
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="ajax-proxy/" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.name">ajax-proxy/</stringProp>
-                <stringProp name="Argument.value"></stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-              <elementProp name="t" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.name">t</stringProp>
-                <stringProp name="Argument.value">${t}</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-              <elementProp name="objectIDs[0]" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.name">objectIDs[0]</stringProp>
-                <stringProp name="Argument.value">32</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-              <elementProp name="parameters[countPosts]" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.name">parameters[countPosts]</stringProp>
-                <stringProp name="Argument.value">true</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-              <elementProp name="className" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.name">className</stringProp>
-                <stringProp name="Argument.value">wbb\data\thread\ThreadAction</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-              <elementProp name="actionName" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.name">actionName</stringProp>
-                <stringProp name="Argument.value">getNewPosts</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-              <elementProp name="parameters[lastPostTime]" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.name">parameters[lastPostTime]</stringProp>
-                <stringProp name="Argument.value">1606224982</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-            </collectionProp>
-          </elementProp>
-          <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
-          <stringProp name="HTTPSampler.port"></stringProp>
-          <stringProp name="HTTPSampler.protocol">https</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/forum/index.php?ajax-proxy/&amp;t=${t}</stringProp>
-          <stringProp name="HTTPSampler.method">POST</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
-        </HTTPSamplerProxy>
-        <hashTree>
-          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
-            <collectionProp name="HeaderManager.headers">
-              <elementProp name="X-Requested-With" elementType="Header">
-                <stringProp name="Header.name">X-Requested-With</stringProp>
-                <stringProp name="Header.value">XMLHttpRequest</stringProp>
-              </elementProp>
-              <elementProp name="Content-Type" elementType="Header">
-                <stringProp name="Header.name">Content-Type</stringProp>
-                <stringProp name="Header.value">application/x-www-form-urlencoded; charset=UTF-8</stringProp>
-              </elementProp>
-              <elementProp name="Accept" elementType="Header">
-                <stringProp name="Header.name">Accept</stringProp>
-                <stringProp name="Header.value">*/*</stringProp>
-              </elementProp>
-            </collectionProp>
-          </HeaderManager>
           <hashTree/>
         </hashTree>
         <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
@@ -1109,865 +940,63 @@ import java.util.*;
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="false">
-          <boolProp name="LoopController.continue_forever">true</boolProp>
-          <stringProp name="LoopController.loops">1</stringProp>
-        </LoopController>
-        <hashTree>
-          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
-            <stringProp name="delimiter">:</stringProp>
-            <stringProp name="fileEncoding"></stringProp>
-            <stringProp name="filename">C:/Users/Wassim/Desktop/Orgadata/LoadTest/CSVSample_user.csv</stringProp>
-            <boolProp name="ignoreFirstLine">false</boolProp>
-            <boolProp name="quotedData">false</boolProp>
-            <boolProp name="recycle">true</boolProp>
-            <stringProp name="shareMode">shareMode.all</stringProp>
-            <boolProp name="stopThread">false</boolProp>
-            <stringProp name="variableNames">User,Pass</stringProp>
-          </CSVDataSet>
-          <hashTree/>
-          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
-            <stringProp name="filename">C:/Users/Wassim/Desktop/Orgadata/allthread.csv</stringProp>
-            <stringProp name="fileEncoding"></stringProp>
-            <stringProp name="variableNames">thread</stringProp>
-            <boolProp name="ignoreFirstLine">false</boolProp>
-            <stringProp name="delimiter"></stringProp>
-            <boolProp name="quotedData">false</boolProp>
-            <boolProp name="recycle">true</boolProp>
-            <boolProp name="stopThread">false</boolProp>
-            <stringProp name="shareMode">shareMode.all</stringProp>
-          </CSVDataSet>
-          <hashTree/>
-          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
-            <stringProp name="filename">C:/Users/Wassim/Desktop/Orgadata/allthread.csv</stringProp>
-            <stringProp name="fileEncoding"></stringProp>
-            <stringProp name="variableNames">th,num</stringProp>
-            <boolProp name="ignoreFirstLine">false</boolProp>
-            <stringProp name="delimiter">?</stringProp>
-            <boolProp name="quotedData">false</boolProp>
-            <boolProp name="recycle">true</boolProp>
-            <boolProp name="stopThread">false</boolProp>
-            <stringProp name="shareMode">shareMode.all</stringProp>
-          </CSVDataSet>
-          <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="LoginGet" enabled="true">
-            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
-              <collectionProp name="Arguments.arguments">
-                <elementProp name="gen-oauth-auth/" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.name">gen-oauth-auth/</stringProp>
-                  <stringProp name="Argument.value"></stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                </elementProp>
-              </collectionProp>
-            </elementProp>
-            <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
-            <stringProp name="HTTPSampler.port"></stringProp>
-            <stringProp name="HTTPSampler.protocol">https</stringProp>
-            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">index.php</stringProp>
-            <stringProp name="HTTPSampler.method">GET</stringProp>
-            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-            <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          </HTTPSamplerProxy>
-          <hashTree>
-            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Uniform Random Timer" enabled="true">
-              <stringProp name="RandomTimer.range">0.0</stringProp>
-              <stringProp name="ConstantTimer.delay">0</stringProp>
-              <stringProp name="TestPlan.comments">Recorded time was 0 milliseconds</stringProp>
-            </UniformRandomTimer>
-            <hashTree/>
-            <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
-              <stringProp name="filename"></stringProp>
-              <stringProp name="parameters"></stringProp>
-              <boolProp name="resetInterpreter">true</boolProp>
-              <stringProp name="script">import org.apache.jmeter.protocol.http.control.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.*;
-
-
-
-
-
-      //////////////////////////////////////////////////////////////////////////////////////
-      
-String str= ctx.getPreviousResult().getResponseDataAsString();
-//log.info(str);
-
-	//	BufferedReader reader;
-		
-		try {
-
-			FileWriter body = new FileWriter(&quot;C:\\Users\\Wassim\\Desktop\\Orgadata\\LoadTest\\bodyy.txt&quot;);
-			body.write(str);
-			/*reader = new BufferedReader(new FileReader(&quot;C:\\Users\\Wassim\\Desktop\\Orgadata\\LoadTest\\bodyy.txt&quot;));
-			 
-		  // log.info(&quot;line====  &quot;+reader.readLine());
-			String line = reader.readLine();
-			log.info(&quot;line====  &quot;+line);
-			ArrayList aList;
-			String token;
-			while (line != null) {
-				log.info(line);
-				log.info(&quot;ttttt      &quot;+line.contains(&quot;var SECURITY_TOKEN =&quot;));
-				if(line.contains(&quot;&lt;input type=\&quot;hidden\&quot; id=\&quot;ReturnUrl\&quot;&quot;)){
-					
-					token=line;
-					line=null;
-					
-				}else{
-					line = reader.readLine();
-				}
-				
-			}
-			log.info(&quot;token =====&gt;&quot;+token);*/
-			/*t = token.replace(&quot;	var SECURITY_TOKEN = &apos;&quot;, &quot;&quot;);
-			token=&quot;&quot;;
-			token=token=t.replace(&quot;&apos;;&quot;,&quot;&quot;);
-			log.info(&quot;token11 =====&gt;&quot;+token);
-			vars.put(&quot;t&quot;,token);*/
-			
-			//reader.close();
-			body.close();
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-</stringProp>
-            </BeanShellPostProcessor>
-            <hashTree/>
-            <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
-              <boolProp name="resetInterpreter">false</boolProp>
-              <stringProp name="parameters"></stringProp>
-              <stringProp name="filename"></stringProp>
-              <stringProp name="script">import org.apache.jmeter.protocol.http.control.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.*;
-
-
-
-
-
-      //////////////////////////////////////////////////////////////////////////////////////
-      
-//String str= ctx.getPreviousResult().getResponseDataAsString();
-//log.info(str);
-
-		BufferedReader reader;
-		
-		try {
-
-			//FileWriter body = new FileWriter(&quot;C:\\Users\\Wassim\\Desktop\\Orgadata\\LoadTest\\bodyy.txt&quot;);
-			//body.write(str);
-			reader = new BufferedReader(new FileReader(&quot;C:\\Users\\Wassim\\Desktop\\Orgadata\\LoadTest\\bodyy.txt&quot;));
-			 
-		  // log.info(&quot;line====  &quot;+reader.readLine());
-			String line = reader.readLine();
-			//log.info(&quot;line====  &quot;+line);
-			ArrayList aList;
-			String token,return_url;
-			while (line != null) {
-				//log.info(line);
-				
-				if(line.contains(&quot;&lt;input type=\&quot;hidden\&quot; id=\&quot;ReturnUrl\&quot;&quot;)){
-					
-					return_url=line;
-					line=null;
-					
-				}else{
-					line = reader.readLine();
-				}
-				
-			}
-			log.info(&quot;return_url =====&gt;&quot;+return_url);
-			t = return_url.replace(&quot;                &lt;input type=\&quot;hidden\&quot; id=\&quot;ReturnUrl\&quot; name=\&quot;ReturnUrl\&quot; value=\&quot;&quot;, &quot;&quot;);
-			return_url=&quot;&quot;;
-			return_url=t.replace(&quot;\&quot; /&gt;&quot;,&quot;&quot;);
-			log.info(&quot;retur_url11 =====&gt;&quot;+return_url);
-			t=return_url.replace(&quot;/connect/authorize/callback?scope=openid%20email%20profile&amp;amp;client_id=forum.bajj.de&amp;amp;redirect_uri=https%3A%2F%2Fforum.bajj.de%2Findex.php%3Fgen-oauth-auth%2F&amp;amp;state=&quot;,&quot;&quot;);
-			state=t.replace(&quot;&amp;amp;response_type=code&quot;,&quot;&quot;);
-			log.info(&quot;state()&quot;+state);
-			return_url=&quot;&quot;;
-			vars.put(&quot;state&quot;,state);
-			return_url=&quot;/connect/authorize/callback?scope=openid%20email%20profile&amp;client_id=forum.bajj.de&amp;redirect_uri=https%3A%2F%2Fforum.bajj.de%2Findex.php%3Fgen-oauth-auth%2F&amp;state=&quot;+state+&quot;&amp;response_type=code&quot;;
-			log.info(&quot;return_url&quot;+return_url);
-			vars.put(&quot;return_url&quot;,return_url);
-			
-			path=&quot;/Account/Login?ReturnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fscope%3Dopenid%2520email%2520profile%26client_id%3Dforum.bajj.de%26redirect_uri%3Dhttps%253A%252F%252Fforum.bajj.de%252Findex.php%253Fgen-oauth-auth%252F%26state%3D&quot;+state+&quot;%26response_type%3Dcode&quot;;
-			log.info(&quot;path:&quot;+path);
-			   vars.put(&quot;path&quot;,path);
-			
-			reader.close();
-			reader = new BufferedReader(new FileReader(&quot;C:\\Users\\Wassim\\Desktop\\Orgadata\\LoadTest\\bodyy.txt&quot;));
-			line = reader.readLine();
-			log.info(&quot;line====  &quot;+line);
-			ArrayList aList;
-			String token,return_url;
-			while (line != null) {
-				//log.info(line);
-				
-				if(line.contains(&quot; &lt;input name=\&quot;__RequestVerificationToken\&quot; type=\&quot;hidden\&quot; value=&quot;)){
-					
-					token=line;
-					line=null;
-					
-				}else{
-					line = reader.readLine();
-				}
-				
-			}
-			log.info(&quot;token =====&gt;&quot;+token);
-			t = token.replace(&quot;            &lt;input name=\&quot;__RequestVerificationToken\&quot; type=\&quot;hidden\&quot; value=\&quot;&quot;, &quot;&quot;);
-			token=&quot;&quot;;
-			token=t.replace(&quot;\&quot; /&gt;&lt;/form&gt;&quot;,&quot;&quot;);
-			log.info(&quot;token11 =====&gt;&quot;+token);
-			vars.put(&quot;token&quot;,token);
-			reader.close();
-			//body.close();
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-</stringProp>
-            </BeanShellPostProcessor>
-            <hashTree/>
-          </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="LoginPost" enabled="true">
-            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
-              <collectionProp name="Arguments.arguments">
-                <elementProp name="ReturnUrl" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.name">ReturnUrl</stringProp>
-                  <stringProp name="Argument.value">/connect/authorize/callback?scope=openid%20email%20profile&amp;client_id=forum.bajj.de&amp;redirect_uri=https%3A%2F%2Fforum.bajj.de%2Findex.php%3Fgen-oauth-auth%2F&amp;state=${state}&amp;response_type=code</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                </elementProp>
-                <elementProp name="button" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.name">button</stringProp>
-                  <stringProp name="Argument.value">Submit</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                </elementProp>
-                <elementProp name="Email" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.name">Email</stringProp>
-                  <stringProp name="Argument.value">${User}</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                </elementProp>
-                <elementProp name="__RequestVerificationToken" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.name">__RequestVerificationToken</stringProp>
-                  <stringProp name="Argument.value">${token}</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                </elementProp>
-                <elementProp name="Password" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.name">Password</stringProp>
-                  <stringProp name="Argument.value">${Pass}</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                </elementProp>
-              </collectionProp>
-            </elementProp>
-            <stringProp name="HTTPSampler.domain">${BASE_URL_2}</stringProp>
-            <stringProp name="HTTPSampler.port"></stringProp>
-            <stringProp name="HTTPSampler.protocol">https</stringProp>
-            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">/Account/Login?ReturnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fscope%3Dopenid%2520email%2520profile%26client_id%3Dforum.bajj.de%26redirect_uri%3Dhttps%253A%252F%252Fforum.bajj.de%252Findex.php%253Fgen-oauth-auth%252F%26state%3D${state}%26response_type%3Dcode</stringProp>
-            <stringProp name="HTTPSampler.method">POST</stringProp>
-            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-            <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          </HTTPSamplerProxy>
-          <hashTree>
-            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
-              <collectionProp name="HeaderManager.headers">
-                <elementProp name="Content-Type" elementType="Header">
-                  <stringProp name="Header.name">Content-Type</stringProp>
-                  <stringProp name="Header.value">application/x-www-form-urlencoded</stringProp>
-                </elementProp>
-              </collectionProp>
-            </HeaderManager>
-            <hashTree/>
-            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Uniform Random Timer" enabled="true">
-              <stringProp name="RandomTimer.range">3093.0</stringProp>
-              <stringProp name="ConstantTimer.delay">1546.5</stringProp>
-              <stringProp name="TestPlan.comments">Recorded time was 3093 milliseconds</stringProp>
-            </UniformRandomTimer>
-            <hashTree/>
-          </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Forum/add" enabled="true">
-            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
-              <collectionProp name="Arguments.arguments"/>
-            </elementProp>
-            <stringProp name="HTTPSampler.domain">forum.bajj.de</stringProp>
-            <stringProp name="HTTPSampler.port"></stringProp>
-            <stringProp name="HTTPSampler.protocol">https</stringProp>
-            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">${thread}</stringProp>
-            <stringProp name="HTTPSampler.method">GET</stringProp>
-            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-            <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          </HTTPSamplerProxy>
-          <hashTree>
-            <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
-              <boolProp name="resetInterpreter">true</boolProp>
-              <stringProp name="parameters"></stringProp>
-              <stringProp name="filename"></stringProp>
-              <stringProp name="script">import org.apache.jmeter.protocol.http.control.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.*;
-
-
-
-
-
-    // CookieManager cm= ctx.getCurrentSampler().getCookieManager();
-     //Cookie c = cm.get(1);
-     
-    // vars.put(&quot;token&quot;, c.getValue());
-    // c = cm.get(0);
-   //  log.info(&quot;Cookies=  &quot;+c.getValue());
-      //vars.put(&quot;cookies&quot;, c.getValue());
-     // log.info(ctx.getPreviousResult().getResponseDataAsString());
-      String str= ctx.getPreviousResult().getResponseDataAsString();
-
-      //////////////////////////////////////////////////////////////////////////////////////
-      
-
-
-		//BufferedReader reader;
-		//String line;
-		
-		try {
-			FileWriter body = new FileWriter(&quot;C:\\Users\\Wassim\\Desktop\\Orgadata\\LoadTest\\forum.txt&quot;);
-			body.write(str);
-			//log.info(&quot;*****&quot;+str);
-			/*reader = new BufferedReader(new FileReader(&quot;C:\\Users\\Wassim\\Desktop\\Orgadata\\LoadTest\\forum.txt&quot;));
-			 
-		   
-			line = reader.readLine();
-			//ArrayList aList;
-			String t,token;
-			while (line != null) {
-				//log.info(line);
-				//log.info(&quot;ttttt      &quot;+line.contains(&quot;var SECURITY_TOKEN =&quot;));
-				if(line.contains(&quot;var SECURITY_TOKEN =&quot;)){
-					//t = line.replace(&quot;	var SECURITY_TOKEN = &apos;&quot;, &quot;&quot;);
-					//token=t.replace(&quot;&apos;;&quot;);
-					token=line;
-					line=null;
-					
-				}else{
-					line = reader.readLine();
-				}
-				
-			}
-			log.info(&quot;token =====&gt;&quot;+token);
-			t = token.replace(&quot;	var SECURITY_TOKEN = &apos;&quot;, &quot;&quot;);
-			token=&quot;&quot;;
-			token=token=t.replace(&quot;&apos;;&quot;,&quot;&quot;);
-			log.info(&quot;token11 =====&gt;&quot;+token);
-			vars.put(&quot;t&quot;,token);
-			reader.close();
-			}
-			catch (IOException e) {
-			e.printStackTrace();
-		}
-			//////////////////////////////////////////////
-			try{
-			reader = new BufferedReader(new FileReader(&quot;C:\\Users\\Wassim\\Desktop\\Orgadata\\LoadTest\\forum.txt&quot;));
-			
-			String tmpHash;
-			log.info(line);
-			while (line != null) {
-				log.info(line);
-				
-				if(line.contains(&quot;&lt;input type=\&quot;hidden\&quot; name=\&quot;tmpHash\&quot; value=\&quot;&quot;)){
-					
-					tmpHash=line;
-					line=null;
-					
-				}else{
-					line = reader.readLine();
-				}
-				
-			}
-			log.info(&quot;tmpHash =====&gt;&quot;+tmpHash);
-			t=tmpHash.replace(&quot;&lt;input type=\&quot;hidden\&quot; name=\&quot;tmpHash\&quot; value=\&quot;&quot;,&quot;&quot;);
-			tmpHash=&quot;&quot;;
-			tmpHash=t.replace(&quot;\&quot;&gt;&quot;,&quot;&quot;);
-			log.info(&quot;tmpHash =====&gt;&quot;+tmpHash);
-			vars.put(&quot;tmpHash&quot;,tmpHash);
-			reader.close();}
-			catch (IOException e) {
-			e.printStackTrace();
-		}
-			////////////////////////////////////////////////////////
-			try{
-			reader = new BufferedReader(new FileReader(&quot;C:\\Users\\Wassim\\Desktop\\Orgadata\\LoadTest\\forum.txt&quot;));
-			line = reader.readLine();
-			String boardID;
-			log.info(line);
-			while (line != null) {
-				log.info(line);
-				
-				if(line.contains(&quot;&lt;li&gt;&lt;a href=\&quot;#\&quot; data-extended-link=\&quot;https://forum.bajj.de/index.php?search/&amp;amp;types%5B%5D=com.woltlab.wbb.post\&quot; data-object-type=\&quot;com.woltlab.wbb.post\&quot; data-parameters=&apos;{ \&quot;boardIDs[]\&quot;:&quot;)){
-					
-					boardID=line;
-					line=null;
-					
-				}else{
-					line = reader.readLine();
-				}
-				
-			}
-			log.info(&quot;boardID =====&gt;&quot;+boardID);
-			t=boardID.replace(&quot;											&lt;li&gt;&lt;a href=\&quot;#\&quot; data-extended-link=\&quot;https://forum.bajj.de/index.php?search/&amp;amp;types%5B%5D=com.woltlab.wbb.post\&quot; data-object-type=\&quot;com.woltlab.wbb.post\&quot; data-parameters=&apos;{ \&quot;boardIDs[]\&quot;:&quot;,&quot;&quot;);
-			boardID=&quot;&quot;;
-			boardID=t.replace(&quot;}&apos;&gt;This Forum&lt;/a&gt;&lt;/li&gt;&quot;,&quot;&quot;);
-			log.info(&quot;boardID =====&gt;&quot;+boardID);
-			vars.put(&quot;boardID&quot;,boardID);
-			reader.close();
-			}
-			catch (IOException e) {
-			e.printStackTrace();
-		}
-			/////////////////////////////////////////////////////////
-			try{
-			reader = new BufferedReader(new FileReader(&quot;C:\\Users\\Wassim\\Desktop\\Orgadata\\LoadTest\\forum.txt&quot;));
-			line = reader.readLine();
-			String pollMaxVotes;
-			log.info(line);
-			while (line != null) {
-				log.info(line);
-				
-				if(line.contains(&quot;&lt;input type=\&quot;number\&quot; name=\&quot;pollMaxVotes\&quot; id=\&quot;pollMaxVotes\&quot; value=\&quot;&quot;)){
-					
-					pollMaxVotes=line;
-					line=null;
-					
-				}else{
-					line = reader.readLine();
-				}
-				
-			}
-			log.info(&quot;pollMaxVotes =====&gt;&quot;+pollMaxVotes);
-			t=pollMaxVotes.replace(&quot;				&lt;input type=\&quot;number\&quot; name=\&quot;pollMaxVotes\&quot; id=\&quot;pollMaxVotes\&quot; value=\&quot;&quot;,&quot;&quot;);
-			pollMaxVotes=&quot;&quot;;
-			pollMaxVotes=t.replace(&quot;\&quot; min=\&quot;1\&quot; class=\&quot;tiny\&quot;&gt;&quot;,&quot;&quot;);
-			log.info(&quot;pollMaxVotes =====&gt;&quot;+pollMaxVotes);
-			vars.put(&quot;pollMaxVotes&quot;,pollMaxVotes);
-			reader.close();*/
-			body.close();
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-</stringProp>
-            </BeanShellPostProcessor>
-            <hashTree/>
-            <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
-              <boolProp name="resetInterpreter">false</boolProp>
-              <stringProp name="parameters"></stringProp>
-              <stringProp name="filename"></stringProp>
-              <stringProp name="script">
-/////////////////////////////////////////////////////////
-import org.apache.jmeter.protocol.http.control.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.*;
-
-
-
-
-
-    // CookieManager cm= ctx.getCurrentSampler().getCookieManager();
-     //Cookie c = cm.get(1);
-     
-    // vars.put(&quot;token&quot;, c.getValue());
-    // c = cm.get(0);
-   //  log.info(&quot;Cookies=  &quot;+c.getValue());
-      //vars.put(&quot;cookies&quot;, c.getValue());
-     // log.info(ctx.getPreviousResult().getResponseDataAsString());
-     // String str= ctx.getPreviousResult().getResponseDataAsString();
-
-      //////////////////////////////////////////////////////////////////////////////////////
-      
-
-
-		BufferedReader reader;
-		String line;
-		
-		try {
-			//FileWriter body = new FileWriter(&quot;C:\\Users\\Wassim\\Desktop\\Orgadata\\LoadTest\\forum.txt&quot;);
-			//body.write(str);
-			//log.info(&quot;*****&quot;+str);
-			reader = new BufferedReader(new FileReader(&quot;C:\\Users\\Wassim\\Desktop\\Orgadata\\LoadTest\\forum.txt&quot;));
-			 
-		   
-			line = reader.readLine();
-			//ArrayList aList;
-			String t,token;
-			while (line != null) {
-				//log.info(line);
-				//log.info(&quot;ttttt      &quot;+line.contains(&quot;var SECURITY_TOKEN =&quot;));
-				if(line.contains(&quot;var SECURITY_TOKEN =&quot;)){
-					//t = line.replace(&quot;	var SECURITY_TOKEN = &apos;&quot;, &quot;&quot;);
-					//token=t.replace(&quot;&apos;;&quot;);
-					token=line;
-					line=null;
-					
-				}else{
-					line = reader.readLine();
-				}
-				
-			}
-			log.info(&quot;token =====&gt;&quot;+token);
-			t = token.replace(&quot;	var SECURITY_TOKEN = &apos;&quot;, &quot;&quot;);
-			token=&quot;&quot;;
-			token=token=t.replace(&quot;&apos;;&quot;,&quot;&quot;);
-			log.info(&quot;token11 =====&gt;&quot;+token);
-			vars.put(&quot;t&quot;,token);
-			reader.close();
-			}
-			catch (IOException e) {
-			e.printStackTrace();
-		}
-			//////////////////////////////////////////////
-			try{
-			reader = new BufferedReader(new FileReader(&quot;C:\\Users\\Wassim\\Desktop\\Orgadata\\LoadTest\\forum.txt&quot;));
-			line = reader.readLine();
-			String tmpHash;
-			log.info(line);
-			while (line != null) {
-				log.info(line);
-				
-				if(line.contains(&quot;&lt;input type=\&quot;hidden\&quot; name=\&quot;tmpHash\&quot; value=\&quot;&quot;)){
-					
-					tmpHash=line;
-					line=null;
-					
-				}else{
-					line = reader.readLine();
-				}
-				
-			}
-			log.info(&quot;tmpHash =====&gt;&quot;+tmpHash);
-			t=tmpHash.replace(&quot;&lt;input type=\&quot;hidden\&quot; name=\&quot;tmpHash\&quot; value=\&quot;&quot;,&quot;&quot;);
-			tmpHash=&quot;&quot;;
-			tmpHash=t.replace(&quot;\&quot;&gt;&quot;,&quot;&quot;);
-			log.info(&quot;tmpHash =====&gt;&quot;+tmpHash);
-			vars.put(&quot;tmpHash&quot;,tmpHash);
-			reader.close();}
-			catch (IOException e) {
-			e.printStackTrace();
-		}
-			////////////////////////////////////////////////////////
-			try{
-			reader = new BufferedReader(new FileReader(&quot;C:\\Users\\Wassim\\Desktop\\Orgadata\\LoadTest\\forum.txt&quot;));
-			line = reader.readLine();
-			String boardID;
-			log.info(line);
-			while (line != null) {
-				log.info(line);
-				
-				if(line.contains(&quot;&lt;li&gt;&lt;a href=\&quot;#\&quot; data-extended-link=\&quot;https://forum.bajj.de/index.php?search/&amp;amp;types%5B%5D=com.woltlab.wbb.post\&quot; data-object-type=\&quot;com.woltlab.wbb.post\&quot; data-parameters=&apos;{ \&quot;boardIDs[]\&quot;:&quot;)){
-					
-					boardID=line;
-					line=null;
-					
-				}else{
-					line = reader.readLine();
-				}
-				
-			}
-			log.info(&quot;boardID =====&gt;&quot;+boardID);
-			t=boardID.replace(&quot;											&lt;li&gt;&lt;a href=\&quot;#\&quot; data-extended-link=\&quot;https://forum.bajj.de/index.php?search/&amp;amp;types%5B%5D=com.woltlab.wbb.post\&quot; data-object-type=\&quot;com.woltlab.wbb.post\&quot; data-parameters=&apos;{ \&quot;boardIDs[]\&quot;:&quot;,&quot;&quot;);
-			boardID=&quot;&quot;;
-			boardID=t.replace(&quot;}&apos;&gt;This Forum&lt;/a&gt;&lt;/li&gt;&quot;,&quot;&quot;);
-			log.info(&quot;boardID =====&gt;&quot;+boardID);
-			vars.put(&quot;boardID&quot;,boardID);
-			reader.close();
-			}
-			catch (IOException e) {
-			e.printStackTrace();
-		}
-			/////////////////////////////////////////////////////////
-			try{
-			reader = new BufferedReader(new FileReader(&quot;C:\\Users\\Wassim\\Desktop\\Orgadata\\LoadTest\\forum.txt&quot;));
-			line = reader.readLine();
-			String pollMaxVotes;
-			log.info(line);
-			while (line != null) {
-				log.info(line);
-				
-				if(line.contains(&quot;&lt;input type=\&quot;number\&quot; name=\&quot;pollMaxVotes\&quot; id=\&quot;pollMaxVotes\&quot; value=\&quot;&quot;)){
-					
-					pollMaxVotes=line;
-					line=null;
-					
-				}else{
-					line = reader.readLine();
-				}
-				
-			}
-			log.info(&quot;pollMaxVotes =====&gt;&quot;+pollMaxVotes);
-			t=pollMaxVotes.replace(&quot;				&lt;input type=\&quot;number\&quot; name=\&quot;pollMaxVotes\&quot; id=\&quot;pollMaxVotes\&quot; value=\&quot;&quot;,&quot;&quot;);
-			pollMaxVotes=&quot;&quot;;
-			pollMaxVotes=t.replace(&quot;\&quot; min=\&quot;1\&quot; class=\&quot;tiny\&quot;&gt;&quot;,&quot;&quot;);
-			log.info(&quot;pollMaxVotes =====&gt;&quot;+pollMaxVotes);
-			vars.put(&quot;pollMaxVotes&quot;,pollMaxVotes);
-			reader.close();
-			//body.close();
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-</stringProp>
-            </BeanShellPostProcessor>
-            <hashTree/>
-            <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
-              <boolProp name="resetInterpreter">false</boolProp>
-              <stringProp name="parameters"></stringProp>
-              <stringProp name="filename"></stringProp>
-              <stringProp name="script">import java.util.*;
-import java.util.Random;
-String subject=&quot;&quot;;
-String text=&quot;&quot;;
-
-int i;
-Random r = new Random();
-for(i=0;i&lt;8;i++){
-	
-subject=subject+(char)(r.nextInt(26) + &apos;A&apos;);
-}
-for(i=0;i&lt;20;i++){
-	
-text=text+(char)(r.nextInt(26) + &apos;a&apos;);
-}
-vars.put(&quot;subject&quot;,subject);
-vars.put(&quot;text&quot;,text);</stringProp>
-            </BeanShellPostProcessor>
-            <hashTree/>
-          </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Forum/add/beitrag" enabled="true">
-            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
-              <collectionProp name="Arguments.arguments">
-                <elementProp name="${num}" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.name">${num}</stringProp>
-                  <stringProp name="Argument.value"></stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                </elementProp>
-                <elementProp name="t" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.name">t</stringProp>
-                  <stringProp name="Argument.value">${t}</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                </elementProp>
-                <elementProp name="subject" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.name">subject</stringProp>
-                  <stringProp name="Argument.value">${subject}</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                </elementProp>
-                <elementProp name="__files[]" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.name">__files[]</stringProp>
-                  <stringProp name="Argument.value"></stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                </elementProp>
-                <elementProp name="pollEndTime" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.name">pollEndTime</stringProp>
-                  <stringProp name="Argument.value"></stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                </elementProp>
-                <elementProp name="tmpHash" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.name">tmpHash</stringProp>
-                  <stringProp name="Argument.value">${tmpHash}</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                </elementProp>
-                <elementProp name="text" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.name">text</stringProp>
-                  <stringProp name="Argument.value">&lt;p&gt;${text}&lt;/p&gt;</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                </elementProp>
-                <elementProp name="pollQuestion" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.name">pollQuestion</stringProp>
-                  <stringProp name="Argument.value"></stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                </elementProp>
-                <elementProp name="pollMaxVotes" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.name">pollMaxVotes</stringProp>
-                  <stringProp name="Argument.value">${pollMaxVotes}</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                </elementProp>
-              </collectionProp>
-            </elementProp>
-            <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
-            <stringProp name="HTTPSampler.port"></stringProp>
-            <stringProp name="HTTPSampler.protocol">https</stringProp>
-            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">${thread}</stringProp>
-            <stringProp name="HTTPSampler.method">POST</stringProp>
-            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-            <stringProp name="HTTPSampler.response_timeout"></stringProp>
-          </HTTPSamplerProxy>
-          <hashTree>
-            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
-              <collectionProp name="HeaderManager.headers">
-                <elementProp name="Upgrade-Insecure-Requests" elementType="Header">
-                  <stringProp name="Header.name">Upgrade-Insecure-Requests</stringProp>
-                  <stringProp name="Header.value">1</stringProp>
-                </elementProp>
-                <elementProp name="Content-Type" elementType="Header">
-                  <stringProp name="Header.name">Content-Type</stringProp>
-                  <stringProp name="Header.value">application/x-www-form-urlencoded</stringProp>
-                </elementProp>
-                <elementProp name="Accept" elementType="Header">
-                  <stringProp name="Header.name">Accept</stringProp>
-                  <stringProp name="Header.value">text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9</stringProp>
-                </elementProp>
-              </collectionProp>
-            </HeaderManager>
-            <hashTree/>
-            <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Uniform Random Timer" enabled="true">
-              <stringProp name="RandomTimer.range">0.0</stringProp>
-              <stringProp name="ConstantTimer.delay">0</stringProp>
-              <stringProp name="TestPlan.comments">Recorded time was 0 milliseconds</stringProp>
-            </UniformRandomTimer>
-            <hashTree/>
-          </hashTree>
-        </hashTree>
+        <BackendListener guiclass="BackendListenerGui" testclass="BackendListener" testname="Backend Listener" enabled="true">
+          <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="testName" elementType="Argument">
+                <stringProp name="Argument.name">testName</stringProp>
+                <stringProp name="Argument.value">jmeter</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="instrumentationKey" elementType="Argument">
+                <stringProp name="Argument.name">instrumentationKey</stringProp>
+                <stringProp name="Argument.value">f85269a8-a274-40d9-a24c-4084521ce16c</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="liveMetrics" elementType="Argument">
+                <stringProp name="Argument.name">liveMetrics</stringProp>
+                <stringProp name="Argument.value">true</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="samplersList" elementType="Argument">
+                <stringProp name="Argument.name">samplersList</stringProp>
+                <stringProp name="Argument.value"></stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+              <elementProp name="useRegexForSamplerList" elementType="Argument">
+                <stringProp name="Argument.name">useRegexForSamplerList</stringProp>
+                <stringProp name="Argument.value">false</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="classname">io.github.adrianmo.jmeter.backendlistener.azure.AzureBackendClient</stringProp>
+        </BackendListener>
+        <hashTree/>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group1" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Search" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
-        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">1</stringProp>
+          <stringProp name="LoopController.loops">5</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">1</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
-        <boolProp name="ThreadGroup.scheduler">false</boolProp>
-        <stringProp name="ThreadGroup.duration"></stringProp>
-        <stringProp name="ThreadGroup.delay"></stringProp>
+        <stringProp name="ThreadGroup.num_threads">50</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">10</stringProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">300</stringProp>
+        <stringProp name="ThreadGroup.delay">0</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
       </ThreadGroup>
       <hashTree>
-        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
-          <stringProp name="delimiter">:</stringProp>
-          <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="filename">D:/apache-jmeter-5.3/bin/load2/CSVSample_user.csv</stringProp>
-          <boolProp name="ignoreFirstLine">false</boolProp>
-          <boolProp name="quotedData">false</boolProp>
-          <boolProp name="recycle">true</boolProp>
-          <stringProp name="shareMode">shareMode.all</stringProp>
-          <boolProp name="stopThread">false</boolProp>
-          <stringProp name="variableNames">User,Pass</stringProp>
-        </CSVDataSet>
-        <hashTree/>
-        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
-          <stringProp name="filename">D:/apache-jmeter-5.3/bin/load2/allthread.csv</stringProp>
-          <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">thread</stringProp>
-          <boolProp name="ignoreFirstLine">false</boolProp>
-          <stringProp name="delimiter"></stringProp>
-          <boolProp name="quotedData">false</boolProp>
-          <boolProp name="recycle">true</boolProp>
-          <boolProp name="stopThread">false</boolProp>
-          <stringProp name="shareMode">shareMode.all</stringProp>
-        </CSVDataSet>
-        <hashTree/>
-        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
-          <stringProp name="filename">D:/apache-jmeter-5.3/bin/load2/allthread.csv</stringProp>
-          <stringProp name="fileEncoding"></stringProp>
-          <stringProp name="variableNames">th,num</stringProp>
-          <boolProp name="ignoreFirstLine">false</boolProp>
-          <stringProp name="delimiter">?</stringProp>
-          <boolProp name="quotedData">false</boolProp>
-          <boolProp name="recycle">true</boolProp>
-          <boolProp name="stopThread">false</boolProp>
-          <stringProp name="shareMode">shareMode.all</stringProp>
-        </CSVDataSet>
-        <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="LoginGet" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="get/search" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="gen-oauth-auth/" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.name">gen-oauth-auth/</stringProp>
-                <stringProp name="Argument.value"></stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-            </collectionProp>
+            <collectionProp name="Arguments.arguments"/>
           </elementProp>
           <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">index.php</stringProp>
+          <stringProp name="HTTPSampler.path">/index.php?search/</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -1978,6 +1007,23 @@ vars.put(&quot;text&quot;,text);</stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="Upgrade-Insecure-Requests" elementType="Header">
+                <stringProp name="Header.name">Upgrade-Insecure-Requests</stringProp>
+                <stringProp name="Header.value">1</stringProp>
+              </elementProp>
+              <elementProp name="Content-Type" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/x-www-form-urlencoded</stringProp>
+              </elementProp>
+              <elementProp name="Accept" elementType="Header">
+                <stringProp name="Header.name">Accept</stringProp>
+                <stringProp name="Header.value">text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
           <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Uniform Random Timer" enabled="true">
             <stringProp name="RandomTimer.range">0.0</stringProp>
             <stringProp name="ConstantTimer.delay">0</stringProp>
@@ -2018,189 +1064,7 @@ String str= ctx.getPreviousResult().getResponseDataAsString();
 			//String line = reader.readLine();
 			//log.info(&quot;line====  &quot;+line);
 			//ArrayList aList;
-			String token,return_url;
-			String[]lines = str.split(System.getProperty(&quot;line.separator&quot;));
-			for(String line : lines){
-			
-				//log.info(line);
-				
-				if(line.contains(&quot;&lt;input type=\&quot;hidden\&quot; id=\&quot;ReturnUrl\&quot;&quot;)){
-					
-					return_url=line;
-					
-					
-				}
-				if(line.contains(&quot; &lt;input name=\&quot;__RequestVerificationToken\&quot; type=\&quot;hidden\&quot; value=&quot;)){
-					
-					token=line;
-					
-					
-				}
-				
-			}
-			log.info(&quot;return_url =====&gt;&quot;+return_url);
-			t = return_url.replace(&quot;                &lt;input type=\&quot;hidden\&quot; id=\&quot;ReturnUrl\&quot; name=\&quot;ReturnUrl\&quot; value=\&quot;&quot;, &quot;&quot;);
-			return_url=&quot;&quot;;
-			return_url=t.replace(&quot;\&quot; /&gt;&quot;,&quot;&quot;);
-			log.info(&quot;retur_url11 =====&gt;&quot;+return_url);
-			t=return_url.replace(&quot;/connect/authorize/callback?scope=openid%20email%20profile&amp;amp;client_id=forum.bajj.de&amp;amp;redirect_uri=https%3A%2F%2Fforum.bajj.de%2Findex.php%3Fgen-oauth-auth%2F&amp;amp;state=&quot;,&quot;&quot;);
-			state=t.replace(&quot;&amp;amp;response_type=code&quot;,&quot;&quot;);
-			log.info(&quot;state()&quot;+state);
-			return_url=&quot;&quot;;
-			vars.put(&quot;state&quot;,state);
-			return_url=&quot;/connect/authorize/callback?scope=openid%20email%20profile&amp;client_id=forum.bajj.de&amp;redirect_uri=https%3A%2F%2Fforum.bajj.de%2Findex.php%3Fgen-oauth-auth%2F&amp;state=&quot;+state+&quot;&amp;response_type=code&quot;;
-			log.info(&quot;return_url&quot;+return_url);
-			vars.put(&quot;return_url&quot;,return_url);
-			
-			path=&quot;/Account/Login?ReturnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fscope%3Dopenid%2520email%2520profile%26client_id%3Dforum.bajj.de%26redirect_uri%3Dhttps%253A%252F%252Fforum.bajj.de%252Findex.php%253Fgen-oauth-auth%252F%26state%3D&quot;+state+&quot;%26response_type%3Dcode&quot;;
-			log.info(&quot;path:&quot;+path);
-			   vars.put(&quot;path&quot;,path);
-			
-			//////////////////////////////////////////////////////////
-			log.info(&quot;token =====&gt;&quot;+token);
-			String t = token.replace(&quot;    &lt;input name=\&quot;__RequestVerificationToken\&quot; type=\&quot;hidden\&quot; value=\&quot;&quot;, &quot;&quot;);
-			token=&quot;&quot;;
-			token=t.replace(&quot;\&quot; /&gt;&lt;/form&gt;&quot;,&quot;&quot;);
-			log.info(&quot;tokenlogin =====&gt;&quot;+token);
-			vars.put(&quot;token&quot;,token);
-			
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-</stringProp>
-          </BeanShellPostProcessor>
-          <hashTree/>
-        </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="LoginPost" enabled="true">
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="ReturnUrl" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.name">ReturnUrl</stringProp>
-                <stringProp name="Argument.value">/connect/authorize/callback?scope=openid%20email%20profile&amp;client_id=forum.bajj.de&amp;redirect_uri=https%3A%2F%2Fforum.bajj.de%2Findex.php%3Fgen-oauth-auth%2F&amp;state=${state}&amp;response_type=code</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-              <elementProp name="button" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.name">button</stringProp>
-                <stringProp name="Argument.value">Submit</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-              <elementProp name="Email" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.name">Email</stringProp>
-                <stringProp name="Argument.value">${User}</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-              <elementProp name="Password" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.name">Password</stringProp>
-                <stringProp name="Argument.value">${Pass}</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-              <elementProp name="__RequestVerificationToken" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">${token}</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                <stringProp name="Argument.name">__RequestVerificationToken</stringProp>
-              </elementProp>
-            </collectionProp>
-          </elementProp>
-          <stringProp name="HTTPSampler.domain">${BASE_URL_2}</stringProp>
-          <stringProp name="HTTPSampler.port"></stringProp>
-          <stringProp name="HTTPSampler.protocol">https</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">/Account/Login?ReturnUrl=%2Fconnect%2Fauthorize%2Fcallback%3Fscope%3Dopenid%2520email%2520profile%26client_id%3Dforum.bajj.de%26redirect_uri%3Dhttps%253A%252F%252Fforum.bajj.de%252Findex.php%253Fgen-oauth-auth%252F%26state%3D${state}%26response_type%3Dcode</stringProp>
-          <stringProp name="HTTPSampler.method">POST</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
-        </HTTPSamplerProxy>
-        <hashTree>
-          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
-            <collectionProp name="HeaderManager.headers">
-              <elementProp name="Content-Type" elementType="Header">
-                <stringProp name="Header.name">Content-Type</stringProp>
-                <stringProp name="Header.value">application/x-www-form-urlencoded</stringProp>
-              </elementProp>
-            </collectionProp>
-          </HeaderManager>
-          <hashTree/>
-          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Uniform Random Timer" enabled="true">
-            <stringProp name="RandomTimer.range">3093.0</stringProp>
-            <stringProp name="ConstantTimer.delay">1546.5</stringProp>
-            <stringProp name="TestPlan.comments">Recorded time was 3093 milliseconds</stringProp>
-          </UniformRandomTimer>
-          <hashTree/>
-        </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Forum/add" enabled="true">
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
-            <collectionProp name="Arguments.arguments"/>
-          </elementProp>
-          <stringProp name="HTTPSampler.domain">forum.bajj.de</stringProp>
-          <stringProp name="HTTPSampler.port"></stringProp>
-          <stringProp name="HTTPSampler.protocol">https</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">${thread}</stringProp>
-          <stringProp name="HTTPSampler.method">GET</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
-        </HTTPSamplerProxy>
-        <hashTree>
-          <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
-            <boolProp name="resetInterpreter">true</boolProp>
-            <stringProp name="parameters"></stringProp>
-            <stringProp name="filename"></stringProp>
-            <stringProp name="script">import org.apache.jmeter.protocol.http.control.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.*;
-
-
-
-
-
-    // CookieManager cm= ctx.getCurrentSampler().getCookieManager();
-     //Cookie c = cm.get(1);
-     
-    // vars.put(&quot;token&quot;, c.getValue());
-    // c = cm.get(0);
-   //  log.info(&quot;Cookies=  &quot;+c.getValue());
-      //vars.put(&quot;cookies&quot;, c.getValue());
-     // log.info(ctx.getPreviousResult().getResponseDataAsString());
-      String str= ctx.getPreviousResult().getResponseDataAsString();
-
-      //////////////////////////////////////////////////////////////////////////////////////
-      
-
-
-		
-		try {
-			
-			String pollMaxVotes;
 			String token;
-			String tmpHash;
-			String boardID;
 			String[]lines = str.split(System.getProperty(&quot;line.separator&quot;));
 			for(String line : lines){
 			   //do something
@@ -2214,26 +1078,6 @@ import java.util.*;
 					//line=null;
 					
 				}
-					
-				if(line.contains(&quot;&lt;input type=\&quot;number\&quot; name=\&quot;pollMaxVotes\&quot; id=\&quot;pollMaxVotes\&quot; value=\&quot;&quot;)){
-					
-					pollMaxVotes=line;
-					
-				}
-
-				
-				if(line.contains(&quot;&lt;input type=\&quot;hidden\&quot; name=\&quot;tmpHash\&quot; value=\&quot;&quot;)){
-					
-					tmpHash=line;
-					
-				}
-
-				if(line.contains(&quot;&lt;li&gt;&lt;a href=\&quot;#\&quot; data-extended-link=\&quot;https://forum.bajj.de/index.php?search/&amp;amp;types%5B%5D=com.woltlab.wbb.post\&quot; data-object-type=\&quot;com.woltlab.wbb.post\&quot; data-parameters=&apos;{ \&quot;boardIDs[]\&quot;:&quot;)){
-					
-					boardID=line;
-					
-				}
-				
 			}
 			log.info(&quot;token =====&gt;&quot;+token);
 			t = token.replace(&quot;	var SECURITY_TOKEN = &apos;&quot;, &quot;&quot;);
@@ -2241,214 +1085,7 @@ import java.util.*;
 			token=token=t.replace(&quot;&apos;;&quot;,&quot;&quot;);
 			log.info(&quot;token11 =====&gt;&quot;+token);
 			vars.put(&quot;t&quot;,token);
-			//reader.close();
-			/*}
-			catch (IOException e) {
-			e.printStackTrace();
-		}
-			//////////////////////////////////////////////
-			try{
-			reader = new BufferedReader(new FileReader(&quot;C:\\Users\\Wassim\\Desktop\\Orgadata\\LoadTest\\forum.txt&quot;));
-			*/
 			
-			
-				
-				
-			
-			log.info(&quot;tmpHash =====&gt;&quot;+tmpHash);
-			t=tmpHash.replace(&quot;&lt;input type=\&quot;hidden\&quot; name=\&quot;tmpHash\&quot; value=\&quot;&quot;,&quot;&quot;);
-			tmpHash=&quot;&quot;;
-			tmpHash=t.replace(&quot;\&quot;&gt;&quot;,&quot;&quot;);
-			log.info(&quot;tmpHash =====&gt;&quot;+tmpHash);
-			vars.put(&quot;tmpHash&quot;,tmpHash);
-			
-			////////////////////////////////////////////////////////
-			
-			
-				
-	
-				
-			
-			log.info(&quot;boardID =====&gt;&quot;+boardID);
-			t=boardID.replace(&quot;											&lt;li&gt;&lt;a href=\&quot;#\&quot; data-extended-link=\&quot;https://forum.bajj.de/index.php?search/&amp;amp;types%5B%5D=com.woltlab.wbb.post\&quot; data-object-type=\&quot;com.woltlab.wbb.post\&quot; data-parameters=&apos;{ \&quot;boardIDs[]\&quot;:&quot;,&quot;&quot;);
-			boardID=&quot;&quot;;
-			boardID=t.replace(&quot;}&apos;&gt;This Forum&lt;/a&gt;&lt;/li&gt;&quot;,&quot;&quot;);
-			log.info(&quot;boardID =====&gt;&quot;+boardID);
-			vars.put(&quot;boardID&quot;,boardID);
-			/////////////////////////////////////////////////
-				
-		
-			log.info(&quot;pollMaxVotes =====&gt;&quot;+pollMaxVotes);
-			t=pollMaxVotes.replace(&quot;				&lt;input type=\&quot;number\&quot; name=\&quot;pollMaxVotes\&quot; id=\&quot;pollMaxVotes\&quot; value=\&quot;&quot;,&quot;&quot;);
-			pollMaxVotes=&quot;&quot;;
-			pollMaxVotes=t.replace(&quot;\&quot; min=\&quot;1\&quot; class=\&quot;tiny\&quot;&gt;&quot;,&quot;&quot;);
-			log.info(&quot;pollMaxVotes =====&gt;&quot;+pollMaxVotes);
-			vars.put(&quot;pollMaxVotes&quot;,pollMaxVotes);
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-</stringProp>
-          </BeanShellPostProcessor>
-          <hashTree/>
-          <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="false">
-            <boolProp name="resetInterpreter">false</boolProp>
-            <stringProp name="parameters"></stringProp>
-            <stringProp name="filename"></stringProp>
-            <stringProp name="script">
-/////////////////////////////////////////////////////////
-import org.apache.jmeter.protocol.http.control.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.*;
-
-
-
-
-
-    // CookieManager cm= ctx.getCurrentSampler().getCookieManager();
-     //Cookie c = cm.get(1);
-     
-    // vars.put(&quot;token&quot;, c.getValue());
-    // c = cm.get(0);
-   //  log.info(&quot;Cookies=  &quot;+c.getValue());
-      //vars.put(&quot;cookies&quot;, c.getValue());
-     // log.info(ctx.getPreviousResult().getResponseDataAsString());
-     // String str= ctx.getPreviousResult().getResponseDataAsString();
-
-      //////////////////////////////////////////////////////////////////////////////////////
-      
-
-
-		BufferedReader reader;
-		String line;
-		
-		try {
-			//FileWriter body = new FileWriter(&quot;C:\\Users\\Wassim\\Desktop\\Orgadata\\LoadTest\\forum.txt&quot;);
-			//body.write(str);
-			//log.info(&quot;*****&quot;+str);
-			reader = new BufferedReader(new FileReader(&quot;C:\\Users\\Wassim\\Desktop\\Orgadata\\LoadTest\\forum.txt&quot;));
-			 
-		   
-			line = reader.readLine();
-			//ArrayList aList;
-			String t,token;
-			while (line != null) {
-				//log.info(line);
-				//log.info(&quot;ttttt      &quot;+line.contains(&quot;var SECURITY_TOKEN =&quot;));
-				if(line.contains(&quot;var SECURITY_TOKEN =&quot;)){
-					//t = line.replace(&quot;	var SECURITY_TOKEN = &apos;&quot;, &quot;&quot;);
-					//token=t.replace(&quot;&apos;;&quot;);
-					token=line;
-					line=null;
-					
-				}else{
-					line = reader.readLine();
-				}
-				
-			}
-			log.info(&quot;token =====&gt;&quot;+token);
-			t = token.replace(&quot;	var SECURITY_TOKEN = &apos;&quot;, &quot;&quot;);
-			token=&quot;&quot;;
-			token=token=t.replace(&quot;&apos;;&quot;,&quot;&quot;);
-			log.info(&quot;token11 =====&gt;&quot;+token);
-			vars.put(&quot;t&quot;,token);
-			reader.close();
-			}
-			catch (IOException e) {
-			e.printStackTrace();
-		}
-			//////////////////////////////////////////////
-			try{
-			reader = new BufferedReader(new FileReader(&quot;C:\\Users\\Wassim\\Desktop\\Orgadata\\LoadTest\\forum.txt&quot;));
-			line = reader.readLine();
-			String tmpHash;
-			log.info(line);
-			while (line != null) {
-				log.info(line);
-				
-				if(line.contains(&quot;&lt;input type=\&quot;hidden\&quot; name=\&quot;tmpHash\&quot; value=\&quot;&quot;)){
-					
-					tmpHash=line;
-					line=null;
-					
-				}else{
-					line = reader.readLine();
-				}
-				
-			}
-			log.info(&quot;tmpHash =====&gt;&quot;+tmpHash);
-			t=tmpHash.replace(&quot;&lt;input type=\&quot;hidden\&quot; name=\&quot;tmpHash\&quot; value=\&quot;&quot;,&quot;&quot;);
-			tmpHash=&quot;&quot;;
-			tmpHash=t.replace(&quot;\&quot;&gt;&quot;,&quot;&quot;);
-			log.info(&quot;tmpHash =====&gt;&quot;+tmpHash);
-			vars.put(&quot;tmpHash&quot;,tmpHash);
-			reader.close();}
-			catch (IOException e) {
-			e.printStackTrace();
-		}
-			////////////////////////////////////////////////////////
-			try{
-			reader = new BufferedReader(new FileReader(&quot;C:\\Users\\Wassim\\Desktop\\Orgadata\\LoadTest\\forum.txt&quot;));
-			line = reader.readLine();
-			String boardID;
-			log.info(line);
-			while (line != null) {
-				log.info(line);
-				
-				if(line.contains(&quot;&lt;li&gt;&lt;a href=\&quot;#\&quot; data-extended-link=\&quot;https://forum.bajj.de/index.php?search/&amp;amp;types%5B%5D=com.woltlab.wbb.post\&quot; data-object-type=\&quot;com.woltlab.wbb.post\&quot; data-parameters=&apos;{ \&quot;boardIDs[]\&quot;:&quot;)){
-					
-					boardID=line;
-					line=null;
-					
-				}else{
-					line = reader.readLine();
-				}
-				
-			}
-			log.info(&quot;boardID =====&gt;&quot;+boardID);
-			t=boardID.replace(&quot;											&lt;li&gt;&lt;a href=\&quot;#\&quot; data-extended-link=\&quot;https://forum.bajj.de/index.php?search/&amp;amp;types%5B%5D=com.woltlab.wbb.post\&quot; data-object-type=\&quot;com.woltlab.wbb.post\&quot; data-parameters=&apos;{ \&quot;boardIDs[]\&quot;:&quot;,&quot;&quot;);
-			boardID=&quot;&quot;;
-			boardID=t.replace(&quot;}&apos;&gt;This Forum&lt;/a&gt;&lt;/li&gt;&quot;,&quot;&quot;);
-			log.info(&quot;boardID =====&gt;&quot;+boardID);
-			vars.put(&quot;boardID&quot;,boardID);
-			reader.close();
-			}
-			catch (IOException e) {
-			e.printStackTrace();
-		}
-			/////////////////////////////////////////////////////////
-			try{
-			reader = new BufferedReader(new FileReader(&quot;C:\\Users\\Wassim\\Desktop\\Orgadata\\LoadTest\\forum.txt&quot;));
-			line = reader.readLine();
-			String pollMaxVotes;
-			log.info(line);
-			while (line != null) {
-				log.info(line);
-				
-				if(line.contains(&quot;&lt;input type=\&quot;number\&quot; name=\&quot;pollMaxVotes\&quot; id=\&quot;pollMaxVotes\&quot; value=\&quot;&quot;)){
-					
-					pollMaxVotes=line;
-					line=null;
-					
-				}else{
-					line = reader.readLine();
-				}
-				
-			}
-			log.info(&quot;pollMaxVotes =====&gt;&quot;+pollMaxVotes);
-			t=pollMaxVotes.replace(&quot;				&lt;input type=\&quot;number\&quot; name=\&quot;pollMaxVotes\&quot; id=\&quot;pollMaxVotes\&quot; value=\&quot;&quot;,&quot;&quot;);
-			pollMaxVotes=&quot;&quot;;
-			pollMaxVotes=t.replace(&quot;\&quot; min=\&quot;1\&quot; class=\&quot;tiny\&quot;&gt;&quot;,&quot;&quot;);
-			log.info(&quot;pollMaxVotes =====&gt;&quot;+pollMaxVotes);
-			vars.put(&quot;pollMaxVotes&quot;,pollMaxVotes);
-			reader.close();
-			//body.close();
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -2464,30 +1101,34 @@ import java.util.*;
             <stringProp name="script">import java.util.*;
 import java.util.Random;
 String subject=&quot;&quot;;
-String text=&quot;&quot;;
 
-int i;
+
+
 Random r = new Random();
-for(i=0;i&lt;8;i++){
+
 	
 subject=subject+(char)(r.nextInt(26) + &apos;A&apos;);
-}
-for(i=0;i&lt;20;i++){
-	
-text=text+(char)(r.nextInt(26) + &apos;a&apos;);
-}
-vars.put(&quot;subject&quot;,subject);
-vars.put(&quot;text&quot;,text);</stringProp>
+
+
+vars.put(&quot;q&quot;,subject);
+</stringProp>
           </BeanShellPostProcessor>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Forum/add/beitrag" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="post/search" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
             <collectionProp name="Arguments.arguments">
-              <elementProp name="${num}" elementType="HTTPArgument">
+              <elementProp name="search/" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.name">${num}</stringProp>
+                <stringProp name="Argument.name">search/</stringProp>
                 <stringProp name="Argument.value"></stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+              </elementProp>
+              <elementProp name="q" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <stringProp name="Argument.name">q</stringProp>
+                <stringProp name="Argument.value">${q}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
@@ -2498,52 +1139,10 @@ vars.put(&quot;text&quot;,text);</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
-              <elementProp name="subject" elementType="HTTPArgument">
+              <elementProp name="types[]" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.name">subject</stringProp>
-                <stringProp name="Argument.value">${subject}</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-              <elementProp name="__files[]" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.name">__files[]</stringProp>
-                <stringProp name="Argument.value"></stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-              <elementProp name="pollEndTime" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.name">pollEndTime</stringProp>
-                <stringProp name="Argument.value"></stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-              <elementProp name="tmpHash" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.name">tmpHash</stringProp>
-                <stringProp name="Argument.value">${tmpHash}</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-              <elementProp name="text" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.name">text</stringProp>
-                <stringProp name="Argument.value">&lt;p&gt;${text}&lt;/p&gt;</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-              <elementProp name="pollQuestion" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.name">pollQuestion</stringProp>
-                <stringProp name="Argument.value"></stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-                <boolProp name="HTTPArgument.use_equals">true</boolProp>
-              </elementProp>
-              <elementProp name="pollMaxVotes" elementType="HTTPArgument">
-                <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.name">pollMaxVotes</stringProp>
-                <stringProp name="Argument.value">${pollMaxVotes}</stringProp>
+                <stringProp name="Argument.name">types[]</stringProp>
+                <stringProp name="Argument.value">everywhere</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
@@ -2553,7 +1152,7 @@ vars.put(&quot;text&quot;,text);</stringProp>
           <stringProp name="HTTPSampler.port"></stringProp>
           <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">${thread}</stringProp>
+          <stringProp name="HTTPSampler.path">/index.php?search/</stringProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -2587,28 +1186,8 @@ vars.put(&quot;text&quot;,text);</stringProp>
             <stringProp name="TestPlan.comments">Recorded time was 0 milliseconds</stringProp>
           </UniformRandomTimer>
           <hashTree/>
-        </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="OpenPost" enabled="true">
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
-            <collectionProp name="Arguments.arguments"/>
-          </elementProp>
-          <stringProp name="HTTPSampler.domain"></stringProp>
-          <stringProp name="HTTPSampler.port"></stringProp>
-          <stringProp name="HTTPSampler.protocol"></stringProp>
-          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path"></stringProp>
-          <stringProp name="HTTPSampler.method">GET</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
-        </HTTPSamplerProxy>
-        <hashTree>
-          <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
-            <boolProp name="resetInterpreter">false</boolProp>
+          <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="false">
+            <boolProp name="resetInterpreter">true</boolProp>
             <stringProp name="parameters"></stringProp>
             <stringProp name="filename"></stringProp>
             <stringProp name="script">import org.apache.jmeter.protocol.http.control.*;
@@ -2627,11 +1206,11 @@ import java.util.*;
       //////////////////////////////////////////////////////////////////////////////////////
       
 String str= ctx.getPreviousResult().getResponseDataAsString();
-//log.info(str);
+log.info(str);
 
 	
 		
-		try {
+		/*try {
 
 			//FileWriter body = new FileWriter(&quot;C:\\Users\\Wassim\\Desktop\\Orgadata\\LoadTest\\bodyy.txt&quot;);
 			//body.write(str);
@@ -2690,12 +1269,179 @@ String str= ctx.getPreviousResult().getResponseDataAsString();
 			
 		} catch (IOException e) {
 			e.printStackTrace();
+		}*/
+
+</stringProp>
+          </BeanShellPostProcessor>
+          <hashTree/>
+          <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
+            <boolProp name="resetInterpreter">true</boolProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="script">import org.apache.jmeter.protocol.http.control.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.*;
+
+
+
+
+
+      //////////////////////////////////////////////////////////////////////////////////////
+      
+String str= ctx.getPreviousResult().getResponseDataAsString();
+log.info(&quot;Search///////////////////////////&quot;);
+//log.info(str);
+
+	
+		
+		try {
+
+			//FileWriter body = new FileWriter(&quot;C:\\Users\\Wassim\\Desktop\\Orgadata\\LoadTest\\bodyy.txt&quot;);
+			//body.write(str);
+			//reader = new BufferedReader(new FileReader(&quot;C:\\Users\\Wassim\\Desktop\\Orgadata\\LoadTest\\bodyy.txt&quot;));
+			 
+		  // log.info(&quot;line====  &quot;+reader.readLine());
+			//String line = reader.readLine();
+			//log.info(&quot;line====  &quot;+line);
+			//ArrayList aList;
+			String ch=&quot;&quot;;
+			int count=0;
+			String[]lines = str.split(System.getProperty(&quot;line.separator&quot;));
+			for(String line : lines){
+			   //do something
+			
+				//log.info(line);
+				//log.info(&quot;ttttt      &quot;+line.contains(&quot;var SECURITY_TOKEN =&quot;));
+				if(count&lt;3){
+					if(line.contains(&quot;&lt;h3&gt;&quot;)){
+					//t = line.replace(&quot;	var SECURITY_TOKEN = &apos;&quot;, &quot;&quot;);
+					//token=t.replace(&quot;&apos;;&quot;);
+					ch=ch+line;
+					count++;
+					//line=null;
+					
+				}
+					
+				}
+				
+			}
+			log.info(&quot;==============&quot;+ch);
+			lines = ch.split(&quot;\&quot;&gt;&quot;);
+			String [] s,c;
+			count=0;
+			for(String l:lines){
+				log.info(&quot;\n==========line==========&quot;+l);
+				if(count==0){
+					t=l.replace(&quot;							&lt;h3&gt;&lt;a href=\&quot;https://forum.bajj.de&quot;,&quot;&quot;);
+					
+					log.info(&quot;\n hahow ---- &quot;+t);
+					vars.put(&quot;url1&quot;,t);
+					count++;
+				}
+				else if(count==1){
+					
+					//vars.put(&quot;url1&quot;,t);
+					s=l.split(&quot;&lt;/h3&gt;&quot;);
+					String url=s[1];
+					t=url.replace(&quot;							&lt;h3&gt;&lt;a href=\&quot;https://forum.bajj.de&quot;,&quot;&quot;);
+					log.info(&quot;\n hahow ---- &quot;+t);
+					vars.put(&quot;url2&quot;,t);
+					count++;
+				}
+				else if(count==2){
+					
+					//vars.put(&quot;url1&quot;,t);
+					c=l.split(&quot;&lt;/h3&gt;&quot;);
+					String url=c[1];
+					t=url.replace(&quot;							&lt;h3&gt;&lt;a href=\&quot;https://forum.bajj.de&quot;,&quot;&quot;);
+					log.info(&quot;\n hahow ---- &quot;+t);
+					vars.put(&quot;url3&quot;,t);
+					
+					count++;
+				}
+				else{
+					count=5;
+				}
+			}
+			
+			/*log.info(&quot;token =====&gt;&quot;+token);
+			t = token.replace(&quot;	var SECURITY_TOKEN = &apos;&quot;, &quot;&quot;);
+			token=&quot;&quot;;
+			token=token=t.replace(&quot;&apos;;&quot;,&quot;&quot;);
+			log.info(&quot;token11 =====&gt;&quot;+token);
+			vars.put(&quot;t&quot;,token);
+			*/
+			
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
 </stringProp>
           </BeanShellPostProcessor>
           <hashTree/>
         </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="URL1" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">forum.bajj.de</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">${url1}</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="URL2" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">forum.bajj.de</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">${url2}</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="URL3" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">forum.bajj.de</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">${url3}</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
         <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
@@ -4446,6 +3192,353 @@ vars.put(&quot;text&quot;,text);</stringProp>
             <stringProp name="ConstantTimer.delay">0</stringProp>
             <stringProp name="TestPlan.comments">Recorded time was 0 milliseconds</stringProp>
           </UniformRandomTimer>
+          <hashTree/>
+        </hashTree>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Pages" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">5</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">300</stringProp>
+        <stringProp name="ThreadGroup.delay">0</stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <stringProp name="LoopController.loops">3</stringProp>
+        </LoopController>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="filename">C:/Users/Wassim/Desktop/Orgadata/seiten.csv</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames">seiten</stringProp>
+            <boolProp name="ignoreFirstLine">false</boolProp>
+            <stringProp name="delimiter"></stringProp>
+            <boolProp name="quotedData">false</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Bereich" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${seiten}</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
+              <boolProp name="resetInterpreter">false</boolProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="script">import org.apache.jmeter.protocol.http.control.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.*;
+
+
+
+
+
+      //////////////////////////////////////////////////////////////////////////////////////
+      
+String str= ctx.getPreviousResult().getResponseDataAsString();
+log.info(&quot;Search///////////////////////////Beitrag&quot;);
+log.info(str);
+
+	
+		
+		try {
+
+			//FileWriter body = new FileWriter(&quot;C:\\Users\\Wassim\\Desktop\\Orgadata\\LoadTest\\bodyy.txt&quot;);
+			//body.write(str);
+			//reader = new BufferedReader(new FileReader(&quot;C:\\Users\\Wassim\\Desktop\\Orgadata\\LoadTest\\bodyy.txt&quot;));
+			 
+		  // log.info(&quot;line====  &quot;+reader.readLine());
+			//String line = reader.readLine();
+			//log.info(&quot;line====  &quot;+line);
+			//ArrayList aList;
+			String ch=&quot;&quot;;
+			int count=0;
+			int i=0;
+			String[]lines = str.split(System.getProperty(&quot;line.separator&quot;));
+			for(String line : lines){
+			   //do something
+			
+				//log.info(line);
+				//log.info(&quot;ttttt      &quot;+line.contains(&quot;var SECURITY_TOKEN =&quot;));
+				if(count&lt;5){
+					if(line.contains(&quot;&lt;h3&gt;&quot;)){
+					//t = line.replace(&quot;	var SECURITY_TOKEN = &apos;&quot;, &quot;&quot;);
+					//token=t.replace(&quot;&apos;;&quot;);
+					ch=ch+lines[i+3];
+					log.info(&quot;ggggggggg&quot;+lines[i+3]);
+					count++;
+					//line=null;
+					
+				}
+					
+				}
+				i++;
+				
+			}
+			log.info(&quot;==============&quot;+ch);
+			li = ch.split(&quot;&lt;a href=\&quot;https://forum.bajj.de&quot;);
+			String [] s,c;
+			count=0;
+			for(String l:li){
+				log.info(&quot;\n==========line==========&quot;+l);
+				if(count==1){
+					s=l.split(&quot;\&quot;&quot;);
+					
+					log.info(&quot;\n hahow ---- &quot;+s[0]);
+					vars.put(&quot;b1&quot;,s[0]);
+					count++;
+				}
+				else if(count==2){
+					
+					//vars.put(&quot;url1&quot;,t);
+					s=l.split(&quot;\&quot;&quot;);
+					
+					log.info(&quot;\n hahow ---- &quot;+s[0]);
+					vars.put(&quot;b2&quot;,s[0]);
+					count++;
+				}
+				else if(count==3){
+					
+					//vars.put(&quot;url1&quot;,t);
+					s=l.split(&quot;\&quot;&quot;);
+					
+					log.info(&quot;\n hahow ---- &quot;+s[0]);
+					vars.put(&quot;b3&quot;,s[0]);
+					count++;
+				}
+				else if(count==4){
+					
+					//vars.put(&quot;url1&quot;,t);
+					s=l.split(&quot;\&quot;&quot;);
+					
+					log.info(&quot;\n hahow ---- &quot;+s[0]);
+					vars.put(&quot;b4&quot;,s[0]);
+					count++;
+				}
+				else if(count==5){
+					
+					//vars.put(&quot;url1&quot;,t);
+					s=l.split(&quot;\&quot;&quot;);
+					
+					log.info(&quot;\n hahow ---- &quot;+s[0]);
+					vars.put(&quot;b5&quot;,s[0]);
+					count++;
+				}
+				else if(count==0){
+					count++;
+				}
+				else{
+					count=6;
+				}
+			}
+			
+			
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+</stringProp>
+            </BeanShellPostProcessor>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Beitrag1" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${b1}</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Beitrag2" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${b2}</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Beitrag3" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${b3}</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Beitrag4" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${b4}</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Beitrag5" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${b5}</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
           <hashTree/>
         </hashTree>
         <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
